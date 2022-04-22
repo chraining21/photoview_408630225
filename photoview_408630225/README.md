@@ -1,7 +1,7 @@
 # photoview_408630225
 
 middle exam
-Function:除了老師的規定外，我還加了snackbar、toast跟scrollbar的功能。
+Function:除了老師的規定外，我還加了snackbar、toast的功能。
 
 
 ## Getting Started
