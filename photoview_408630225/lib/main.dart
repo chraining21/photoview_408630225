@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'photoview_408630225',
-      home: photogallery(title:'PokiGallery'),
+      home: photogallery(title:'ButterGallery'),
     );
   }
 }
@@ -50,13 +51,16 @@ class photogallery extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
+            childAspectRatio: 1.15,
             physics:  ScrollPhysics(),
             children:<Widget> [
               Container(
                 color:Colors.white,
                 child:InkWell(
                     onTap: () => openGallery(0,context),
-                    child: Image.asset(image[0])
+                    child: Image.asset(
+                        image[0],
+                    )
                 ),
               ),
               Container(
@@ -117,7 +121,7 @@ class photogallery extends StatelessWidget {
         label: Text('Push me!'),
         onPressed: (){
           final text = SnackBar(
-            content: Text('I love Poki!!!'),
+            content: Text('I love Rabbit!!!'),
             action: SnackBarAction(
               label: 'Push me',
               onPressed: (){
@@ -166,22 +170,21 @@ class _GalleryWidgetState extends State<GalleryWidget>{
       body: PhotoViewGallery.builder(
         itemCount: widget.images.length,
         pageController: _pc,
+        enableRotation: false,
         builder: (context,index){
           final _images = widget.images[index];
           return PhotoViewGalleryPageOptions(
             imageProvider: AssetImage(_images),
             minScale: PhotoViewComputedScale.contained*0.1,
-            maxScale: PhotoViewComputedScale.contained,
+            maxScale: PhotoViewComputedScale.covered*2,
           );
         },
+
         onPageChanged: (int index){
           setState(() {
             pindex=index;
           });
         },
-      ),
-      appBar: new AppBar(
-        title: new Text('Poki_'+(pindex).toString()),
       ),
     );
   }
